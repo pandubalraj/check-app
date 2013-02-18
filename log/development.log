@@ -1,0 +1,175 @@
+Connecting to database specified by database.yml
+Connecting to database specified by database.yml
+  [1m[36m (20.3ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" character varying(255) NOT NULL) [0m
+  [1m[35m (3.2ms)[0m   SELECT distinct i.relname, d.indisunique, d.indkey, pg_get_indexdef(d.indexrelid), t.oid
+ FROM pg_class t
+ INNER JOIN pg_index d ON t.oid = d.indrelid
+ INNER JOIN pg_class i ON d.indexrelid = i.oid
+ WHERE i.relkind = 'i'
+ AND d.indisprimary = 'f'
+ AND t.relname = 'schema_migrations'
+ AND i.relnamespace IN (SELECT oid FROM pg_namespace WHERE nspname = ANY (current_schemas(false)) )
+ ORDER BY i.relname
+
+  [1m[36m (37.7ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35m (0.4ms)[0m  SELECT "schema_migrations"."version" FROM "schema_migrations" 
+Migrating to CreatePosts (20130218094324)
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (86.7ms)[0m  CREATE TABLE "posts" ("id" serial primary key, "name" character varying(255), "title" character varying(255), "length" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL) 
+  [1m[36m (0.4ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES ('20130218094324')[0m
+  [1m[35m (41.3ms)[0m  COMMIT
+  [1m[36m (0.3ms)[0m  [1mSELECT "schema_migrations"."version" FROM "schema_migrations" [0m
+  [1m[35mPK and serial sequence (2.9ms)[0m   SELECT attr.attname, seq.relname
+ FROM pg_class seq,
+ pg_attribute attr,
+ pg_depend dep,
+ pg_namespace name,
+ pg_constraint cons
+ WHERE seq.oid = dep.objid
+ AND seq.relkind = 'S'
+ AND attr.attrelid = dep.refobjid
+ AND attr.attnum = dep.refobjsubid
+ AND attr.attrelid = cons.conrelid
+ AND attr.attnum = cons.conkey[1]
+ AND cons.contype = 'p'
+ AND dep.refobjid = '"posts"'::regclass
+
+  [1m[36m (2.0ms)[0m  [1m SELECT distinct i.relname, d.indisunique, d.indkey, pg_get_indexdef(d.indexrelid), t.oid
+ FROM pg_class t
+ INNER JOIN pg_index d ON t.oid = d.indrelid
+ INNER JOIN pg_class i ON d.indexrelid = i.oid
+ WHERE i.relkind = 'i'
+ AND d.indisprimary = 'f'
+ AND t.relname = 'posts'
+ AND i.relnamespace IN (SELECT oid FROM pg_namespace WHERE nspname = ANY (current_schemas(false)) )
+ ORDER BY i.relname
+[0m
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at 2013-02-18 15:18:02 +0530
+Connecting to database specified by database.yml
+Served asset /rails.png - 200 OK (5ms)
+
+
+Started GET "/" for 127.0.0.1 at 2013-02-18 15:18:50 +0530
+Connecting to database specified by database.yml
+Processing by PostsController#index as HTML
+  [1m[36mPost Load (0.4ms)[0m  [1mSELECT "posts".* FROM "posts" [0m
+  Rendered posts/index.html.erb within layouts/application (7.3ms)
+Compiled posts.css  (42ms)  (pid 6645)
+Compiled scaffolds.css  (14ms)  (pid 6645)
+Compiled application.css  (69ms)  (pid 6645)
+Compiled jquery.js  (27ms)  (pid 6645)
+Compiled jquery_ujs.js  (0ms)  (pid 6645)
+Compiled posts.js  (185ms)  (pid 6645)
+Compiled application.js  (275ms)  (pid 6645)
+Completed 200 OK in 549ms (Views: 469.3ms | ActiveRecord: 9.9ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /application.css - 304 Not Modified (6ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /posts.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /jquery.js - 200 OK (6ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /jquery_ujs.js - 200 OK (2ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /scaffolds.css - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /application.js - 304 Not Modified (6ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:51 +0530
+Served asset /posts.js - 304 Not Modified (1ms)
+
+
+Started GET "/posts/new" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Processing by PostsController#new as HTML
+  Rendered posts/_form.html.erb (20.3ms)
+  Rendered posts/new.html.erb within layouts/application (32.5ms)
+Completed 200 OK in 42ms (Views: 36.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /application.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-02-18 15:18:54 +0530
+Served asset /application.js - 304 Not Modified (1ms)
+
+
+Started POST "/posts" for 127.0.0.1 at 2013-02-18 15:19:00 +0530
+Processing by PostsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"661DXmDq/9r5GZdBJcp7d366F1IdsY/0szmsJr89mAw=", "post"=>{"name"=>"Test", "title"=>"post", "length"=>"4"}, "commit"=>"Create Post"}
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36mSQL (68.1ms)[0m  [1mINSERT INTO "posts" ("created_at", "length", "name", "title", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["created_at", Mon, 18 Feb 2013 09:49:00 UTC +00:00], ["length", 4], ["name", "Test"], ["title", "post"], ["updated_at", Mon, 18 Feb 2013 09:49:00 UTC +00:00]]
+  [1m[35m (13.9ms)[0m  COMMIT
+Redirected to http://localhost:3000/posts/1
+Completed 302 Found in 87ms (ActiveRecord: 82.2ms)
+
+
+Started GET "/posts/1" for 127.0.0.1 at 2013-02-18 15:19:00 +0530
+Processing by PostsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPost Load (0.8ms)[0m  [1mSELECT "posts".* FROM "posts" WHERE "posts"."id" = $1 LIMIT 1[0m  [["id", "1"]]
+  Rendered posts/show.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 9ms (Views: 6.0ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffolds.css?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /scaffolds.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.js?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /posts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/posts.css?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /posts.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2013-02-18 15:19:01 +0530
+Served asset /application.js - 304 Not Modified (1ms)
